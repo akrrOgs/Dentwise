@@ -2,6 +2,7 @@
 
 import {
   createDoctor,
+  getAvailableDoctors,
   getDoctors,
   updateDoctor,
 } from "@/lib/actions/doctors.actions";
@@ -39,6 +40,15 @@ export function useUpdteDoctors() {
       queryClient.invalidateQueries({ queryKey: ["getDoctors"] });
     },
     onError: () => console.log("created failed"),
+  });
+
+  return result;
+}
+
+export function useAvailableDoctors() {
+  const result = useQuery({
+    queryKey: ["getAvailableDoctors"],
+    queryFn: getAvailableDoctors,
   });
 
   return result;
