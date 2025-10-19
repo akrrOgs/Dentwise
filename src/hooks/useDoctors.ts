@@ -38,6 +38,7 @@ export function useUpdteDoctors() {
     mutationFn: updateDoctor,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getDoctors"] });
+      queryClient.invalidateQueries({ queryKey: ["getAvailableDoctors"] });
     },
     onError: () => console.log("created failed"),
   });

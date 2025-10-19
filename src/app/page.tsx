@@ -1,17 +1,20 @@
-import CTA from "@/components/landing/CTA"
-import Footer from "@/components/landing/Footer"
-import Header from "@/components/landing/Header"
-import Hero from "@/components/landing/Hero"
-import HowItWorks from "@/components/landing/HowItWorks"
-import PricingSection from "@/components/landing/PricingSection"
-import WhatToAsk from "@/components/landing/WhatToAsk"
-import { currentUser } from "@clerk/nextjs/server"
-import { redirect } from "next/navigation"
+import CTA from "@/components/landing/CTA";
+import Footer from "@/components/landing/Footer";
+import Header from "@/components/landing/Header";
+import Hero from "@/components/landing/Hero";
+import HowItWorks from "@/components/landing/HowItWorks";
+import PricingSection from "@/components/landing/PricingSection";
+import WhatToAsk from "@/components/landing/WhatToAsk";
+import { syncUser } from "@/lib/actions/user.actions";
+import { currentUser } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
 const Home = async () => {
   const user = await currentUser();
 
-  if(user) redirect("/dashboard")
+  await syncUser();
+
+  if (user) redirect("/dashboard");
 
   return (
     <div className="min-h-screen bg-background">
@@ -23,7 +26,7 @@ const Home = async () => {
       <CTA />
       <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
